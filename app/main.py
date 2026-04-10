@@ -8,7 +8,12 @@ from app import email_delivery
 from app.config import settings
 from app.formatter import format_markdown
 from app.jobs import store
-from app.pipeline import run_pipeline
+from app.reliability import (
+    EmailDeliveryError,
+    assert_markdown_nonempty,
+    generate_scripts_reliably,
+    send_email_reliably,
+)
 from app.schemas import (
     IntakeData,
     JobCreateResponse,
@@ -46,32 +51,55 @@ def _run_job(job_id: str) -> None:
     store.update(job_id, status=JobStatus.RUNNING)
     logger.info("Starting job %s for %s", job_id, job.intake.business_name)
 
+    # Stage 1: generate + verify scripts with retry. Hard failure here =
+    # job FAILED (nothing usable was produced).
     try:
-        scripts = run_pipeline(job.intake)
+        scripts = generate_scripts_reliably(job.intake, job_id)
         markdown = format_markdown(scripts, job.intake)
-
-        email_sent = False
-        try:
-            email_sent = email_delivery.send_scripts(job.intake, markdown)
-        except Exception:
-            logger.exception("Email delivery failed for job %s", job_id)
-
-        store.update(
-            job_id,
-            status=JobStatus.COMPLETED,
-            markdown=markdown,
-            completed_at=time.time(),
-            email_sent=email_sent,
-        )
-        logger.info("Job %s completed for %s", job_id, job.intake.business_name)
+        assert_markdown_nonempty(markdown)
     except Exception as e:
-        logger.exception("Job %s failed for %s", job_id, job.intake.business_name)
+        logger.exception(
+            "Job %s: script generation failed for %s", job_id, job.intake.business_name
+        )
         store.update(
             job_id,
             status=JobStatus.FAILED,
-            error=str(e),
+            error=f"Script generation failed: {e}",
             completed_at=time.time(),
         )
+        return
+
+    # Persist markdown immediately so /jobs/{id} can return it even if
+    # email delivery blows up below.
+    store.update(job_id, markdown=markdown)
+
+    # Stage 2: email delivery with retry. If this fails after every retry,
+    # the job is still COMPLETED — the scripts are ready and fetchable —
+    # but email_sent=False and the email error is stored for visibility.
+    email_sent = False
+    email_error: str | None = None
+    try:
+        email_sent = send_email_reliably(job.intake, markdown, job_id)
+    except EmailDeliveryError as e:
+        email_error = str(e)
+    except Exception as e:
+        logger.exception("Job %s: unexpected email error", job_id)
+        email_error = f"Unexpected email error: {e}"
+
+    store.update(
+        job_id,
+        status=JobStatus.COMPLETED,
+        markdown=markdown,
+        completed_at=time.time(),
+        email_sent=email_sent,
+        error=email_error,
+    )
+    logger.info(
+        "Job %s completed for %s (email_sent=%s)",
+        job_id,
+        job.intake.business_name,
+        email_sent,
+    )
 
 
 @app.post("/generate", response_model=JobCreateResponse, status_code=202)

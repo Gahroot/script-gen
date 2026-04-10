@@ -8,6 +8,24 @@ from app.main import app
 from app.schemas import GeneratedScripts, JobStatus
 
 
+def _full_scripts() -> GeneratedScripts:
+    return GeneratedScripts(
+        hooks=[f"Hook text number {i + 1}." for i in range(50)],
+        meats=[
+            "Meat one content that is long enough to pass verification.",
+            "Meat two content that is long enough to pass verification.",
+            "Meat three content that is long enough to pass verification.",
+        ],
+        ctas=[
+            "Tap the link below to get started.",
+            "Click below before spots run out.",
+        ],
+    )
+
+
+_LONG_MARKDOWN = "# Output\n\n" + ("This is script output content. " * 50)
+
+
 @pytest.fixture
 def client():
     return TestClient(app)
@@ -41,15 +59,13 @@ class TestGenerateEndpoint:
             "contact_email": "jane@example.com",
         }
 
-    @patch("app.main.email_delivery.send_scripts", return_value=False)
-    @patch("app.main.format_markdown", return_value="# Output")
-    @patch("app.main.run_pipeline")
+    @patch("app.main.send_email_reliably", return_value=False)
+    @patch("app.main.format_markdown", return_value=_LONG_MARKDOWN)
+    @patch("app.main.generate_scripts_reliably")
     def test_generate_queues_job_and_runs_to_completion(
-        self, mock_pipeline, mock_format, mock_email, client
+        self, mock_generate, mock_format, mock_email, client
     ):
-        mock_pipeline.return_value = GeneratedScripts(
-            hooks=["h"], meats=["m"], ctas=["c"]
-        )
+        mock_generate.return_value = _full_scripts()
 
         resp = client.post("/generate", json=self._make_payload())
 
@@ -66,19 +82,19 @@ class TestGenerateEndpoint:
         assert status_resp.status_code == 200
         status_body = status_resp.json()
         assert status_body["status"] == JobStatus.COMPLETED
-        assert status_body["markdown"] == "# Output"
+        assert status_body["markdown"] == _LONG_MARKDOWN
         assert status_body["business_name"] == "Test Biz"
         assert status_body["duration_seconds"] is not None
-        mock_pipeline.assert_called_once()
+        mock_generate.assert_called_once()
         mock_email.assert_called_once()
 
     def test_generate_invalid_payload(self, client):
         resp = client.post("/generate", json={"business_name": "incomplete"})
         assert resp.status_code == 422
 
-    @patch("app.main.run_pipeline")
-    def test_pipeline_error_marks_job_failed(self, mock_pipeline, client):
-        mock_pipeline.side_effect = RuntimeError("Gemini exploded")
+    @patch("app.main.generate_scripts_reliably")
+    def test_pipeline_error_marks_job_failed(self, mock_generate, client):
+        mock_generate.side_effect = RuntimeError("Gemini exploded")
 
         resp = client.post("/generate", json=self._make_payload())
         assert resp.status_code == 202
