@@ -1,0 +1,36 @@
+{
+  "business_name": "Northbridge Mortgage",
+  "target_audience": "Self-employed professionals and small business owners aged 32-55 in Tennessee who have been told by traditional banks they don't qualify for a mortgage despite strong income",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Big banks denying you because your tax returns show write-offs that hide your real income",
+      "solution": "Bank statement loan programs that qualify you on 12 or 24 months of deposits instead of W2s or tax returns"
+    },
+    {
+      "pain_point": "Loan officers who vanish after you submit your application and leave you wondering for weeks",
+      "solution": "Direct cell phone access to your broker plus weekly status updates until the day of close"
+    },
+    {
+      "pain_point": "Rate quotes that magically go up right before closing",
+      "solution": "Locked-rate guarantee in writing the day you apply — the rate you see is the rate you close at"
+    }
+  ],
+  "offer": "Free 15-minute self-employed qualification review — know exactly how much home you can buy before you start shopping",
+  "risk_reversal": "No upfront fees, no commitment, no credit pull required for the initial review",
+  "guarantees": "Locked-rate guarantee, on-time close guarantee or we credit you $1,000 at closing",
+  "limited_availability": "",
+  "discounts": "Waived processing fees for first-time Northbridge clients",
+  "lead_magnet": "The Self-Employed Homebuyer Playbook: 9 loan programs banks won't tell you about",
+  "top_stats": [
+    "Closed over $480M in loans for self-employed borrowers since 2015",
+    "Access to 74 lenders including private money and non-QM specialists",
+    "Average close time: 21 days versus industry average of 43"
+  ],
+  "website_url": "https://northbridgemortgage.example.com",
+  "landing_page_url": "https://northbridgemortgage.example.com/self-employed",
+  "city": "Nashville",
+  "service_area": "Nashville, Franklin, Brentwood, and all of Tennessee",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0105"
+}

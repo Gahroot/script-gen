@@ -1,0 +1,36 @@
+{
+  "business_name": "Ironhouse Custom Builders",
+  "target_audience": "Affluent families aged 38-60 in the Austin metro with household income $350k+ planning a custom home build on land they already own or are about to buy",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Custom builds that blow 40% over budget and finish a year late",
+      "solution": "Fixed-price contracts with a written on-time guarantee backed by liquidated damages if we miss the date"
+    },
+    {
+      "pain_point": "Builders who disappear after framing and subcontract out quality control to whoever's cheapest",
+      "solution": "Dedicated project manager on-site daily plus weekly owner walkthroughs with photo reports"
+    },
+    {
+      "pain_point": "Finding out six months in that your builder can't actually build the architect's plans",
+      "solution": "In-house architect and engineer review before contract signing so surprises don't happen mid-build"
+    }
+  ],
+  "offer": "Free custom build feasibility report including budget estimate, timeline, and lot analysis — normally $2,500",
+  "risk_reversal": "If we go over our written budget by even one dollar, we eat the difference",
+  "guarantees": "10-year structural warranty, 2-year workmanship warranty, fixed-price contracts",
+  "limited_availability": "Only taking 6 new custom home projects for 2026 — 2 slots remaining",
+  "discounts": "",
+  "lead_magnet": "The Austin Custom Build Cost Guide 2026: real numbers from 40 recent builds",
+  "top_stats": [
+    "Built 120+ custom homes across Travis and Hays County since 2011",
+    "98% of projects delivered on or before contracted completion date",
+    "Average project size: 4,800 sqft at $385 per square foot"
+  ],
+  "website_url": "https://ironhousebuilders.example.com",
+  "landing_page_url": "https://ironhousebuilders.example.com/feasibility",
+  "city": "Austin",
+  "service_area": "Austin, Westlake, Lakeway, Dripping Springs, and the Texas Hill Country",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0102"
+}

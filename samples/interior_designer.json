@@ -1,0 +1,36 @@
+{
+  "business_name": "Juniper & Moss Interiors",
+  "target_audience": "Women aged 40-65 in the Scottsdale and Paradise Valley area with household income $400k+ who just bought a second home or are refreshing their primary residence for entertaining",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Interior designers who push their own taste instead of listening to what you actually want",
+      "solution": "Signature discovery process that maps your lifestyle and aesthetic before a single item is sourced"
+    },
+    {
+      "pain_point": "Waiting 9 months for furniture that shows up damaged or wrong",
+      "solution": "In-house receiving warehouse where every piece is inspected before it enters your home"
+    },
+    {
+      "pain_point": "Getting nickel-and-dimed with surprise trade markups and vague invoices",
+      "solution": "Transparent flat-fee pricing with trade discounts passed directly to you"
+    }
+  ],
+  "offer": "Complimentary 90-minute in-home design consultation and room vision board — reserved for qualified homeowners",
+  "risk_reversal": "If you don't love the final design presentation, walk away with no further obligation",
+  "guarantees": "Flat-fee transparent pricing, in-house receiving and inspection, dedicated designer assigned to your project",
+  "limited_availability": "Accepting 4 new full-home projects per quarter — 1 slot remaining for spring 2026",
+  "discounts": "",
+  "lead_magnet": "The Scottsdale Luxury Home Refresh Guide: 17 design moves that photograph for resale",
+  "top_stats": [
+    "Featured in Architectural Digest, Luxe Magazine, and Phoenix Home & Garden",
+    "Completed 85+ luxury residential projects across Arizona since 2014",
+    "Average full-home project: $280k design budget, 6-8 month timeline"
+  ],
+  "website_url": "https://juniperandmoss.example.com",
+  "landing_page_url": "https://juniperandmoss.example.com/consultation",
+  "city": "Scottsdale",
+  "service_area": "Scottsdale, Paradise Valley, Arcadia, and Desert Mountain",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0103"
+}

@@ -1,0 +1,36 @@
+{
+  "business_name": "Harbor Hills Realty",
+  "target_audience": "First-time homebuyers aged 28-42 in the Seattle metro with household income $110k-$180k who have been renting 3+ years and feel priced out of the market",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Getting beat on every offer by cash buyers and investors",
+      "solution": "Proprietary off-market pocket listings and a pre-underwritten buyer program that makes your offer look like cash"
+    },
+    {
+      "pain_point": "Realtors who ghost once you're under contract and leave you drowning in paperwork",
+      "solution": "Dedicated transaction coordinator assigned to every client with 24-hour response guarantee until close"
+    },
+    {
+      "pain_point": "Feeling like you need 20% down or you can't buy anything in Seattle",
+      "solution": "Partnerships with 12 lenders offering 3-5% down programs most first-time buyers never hear about"
+    }
+  ],
+  "offer": "Free Seattle first-time buyer strategy session plus a custom off-market listings report delivered within 48 hours",
+  "risk_reversal": "If we don't find you a home you love within 90 days, we'll buy you dinner at Canlis — on us",
+  "guarantees": "Dedicated agent, not a junior, on every showing and negotiation",
+  "limited_availability": "Only accepting 8 new buyer clients per month to keep service personal",
+  "discounts": "",
+  "lead_magnet": "Free 2026 Seattle Neighborhood Affordability Map showing hidden pockets under $650k",
+  "top_stats": [
+    "Closed 340+ homes for first-time buyers since 2017",
+    "Average client saves $23k off list price through our negotiation playbook",
+    "4.9 stars across 180+ Zillow and Google reviews"
+  ],
+  "website_url": "https://harborhillsrealty.example.com",
+  "landing_page_url": "https://harborhillsrealty.example.com/first-time-buyers",
+  "city": "Seattle",
+  "service_area": "Seattle, Bellevue, Kirkland, Redmond, and surrounding King County",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0101"
+}

@@ -1,0 +1,36 @@
+{
+  "business_name": "Peak Performance Plumbing",
+  "target_audience": "Homeowners aged 35-65 in suburban neighborhoods who own their home and have household income over $75k",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Plumbers show up late or not at all, wasting an entire day off work",
+      "solution": "Guaranteed 2-hour arrival window or the service call is free"
+    },
+    {
+      "pain_point": "Getting surprise-billed hundreds more than the original quote",
+      "solution": "Upfront flat-rate pricing locked in before any work starts"
+    },
+    {
+      "pain_point": "Shoddy repairs that fail again within weeks",
+      "solution": "Lifetime warranty on all parts and labor for as long as you own the home"
+    }
+  ],
+  "offer": "Free in-home plumbing inspection plus $97 off any repair over $500",
+  "risk_reversal": "100% satisfaction guarantee — if you're not happy, you don't pay",
+  "guarantees": "Lifetime warranty on parts and labor, 2-hour arrival window guarantee",
+  "limited_availability": "Only 15 free inspection slots available this month",
+  "discounts": "$97 off repairs over $500, 10% senior and military discount",
+  "lead_magnet": "Free 27-point home plumbing inspection checklist PDF",
+  "top_stats": [
+    "Over 12,000 homes serviced in the Dallas metro since 2008",
+    "4.9 star average across 2,300+ Google reviews",
+    "Average technician has 15+ years of licensed experience"
+  ],
+  "website_url": "https://peakperformanceplumbing.example.com",
+  "landing_page_url": "https://peakperformanceplumbing.example.com/free-inspection",
+  "city": "Dallas",
+  "service_area": "Dallas-Fort Worth metro area",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0100"
+}

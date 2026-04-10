@@ -1,0 +1,36 @@
+{
+  "business_name": "Summit Peak Roofing",
+  "target_audience": "Homeowners aged 35-70 in the Kansas City metro whose roof was hit by a recent hail or wind storm and who have homeowners insurance but have never filed a claim",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Storm-chaser roofers who knock on the door, take a deposit, and disappear before starting the job",
+      "solution": "Locally owned and operated since 2006 with a permanent office, showroom, and no-deposit policy until materials are on site"
+    },
+    {
+      "pain_point": "Insurance companies lowballing or denying legitimate storm damage claims",
+      "solution": "In-house licensed public adjuster who manages your entire claim so you get what your policy actually covers"
+    },
+    {
+      "pain_point": "Getting a new roof that leaks within two years and having the installer ghost on warranty calls",
+      "solution": "25-year workmanship warranty that transfers to the next homeowner if you sell"
+    }
+  ],
+  "offer": "Free storm damage inspection and insurance claim strategy session — we handle the paperwork, you get the new roof",
+  "risk_reversal": "If insurance doesn't approve the claim, you owe us nothing — not a dime",
+  "guarantees": "25-year transferable workmanship warranty, manufacturer warranties on all materials, no deposit required",
+  "limited_availability": "Storm season scheduling fills fast — currently booking inspections within 48 hours",
+  "discounts": "",
+  "lead_magnet": "The Kansas City Storm Damage Homeowner Guide: how to read your policy before you file",
+  "top_stats": [
+    "Replaced 3,200+ roofs across the Kansas City metro since 2006",
+    "97% insurance claim approval rate when we handle the adjuster call",
+    "Owens Corning Platinum Preferred Contractor — top 1% nationally"
+  ],
+  "website_url": "https://summitpeakroofing.example.com",
+  "landing_page_url": "https://summitpeakroofing.example.com/storm-inspection",
+  "city": "Kansas City",
+  "service_area": "Kansas City metro including Overland Park, Olathe, Lee's Summit, and Independence",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0106"
+}

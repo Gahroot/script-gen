@@ -1,0 +1,36 @@
+{
+  "business_name": "Cornerstone Property Management",
+  "target_audience": "Small-portfolio landlords aged 35-65 in the Denver metro who own 1-10 rental units and are tired of managing tenants themselves while working a full-time job",
+  "pain_points_solutions": [
+    {
+      "pain_point": "Getting 2am calls about leaky faucets and clogged toilets on weekends",
+      "solution": "24/7 in-house maintenance dispatch so tenants never call you again"
+    },
+    {
+      "pain_point": "Property managers who charge for leasing, renewals, inspections, and mystery 'admin fees' that eat your cash flow",
+      "solution": "Single flat 8% management fee with everything included — no leasing fees, no renewal fees, no upcharges"
+    },
+    {
+      "pain_point": "Placing bad tenants who trash the unit and skip out on rent",
+      "solution": "7-point tenant screening with eviction, credit, employment, and landlord verification plus a 12-month tenant guarantee"
+    }
+  ],
+  "offer": "Free rental price analysis and property management audit showing exactly how much more your units should be earning",
+  "risk_reversal": "If we place a tenant who defaults in the first 12 months, we re-lease the unit for free",
+  "guarantees": "Flat 8% management fee all-inclusive, 12-month tenant guarantee, 24/7 maintenance response",
+  "limited_availability": "Only onboarding 10 new doors per month to maintain service quality",
+  "discounts": "First month of management free when you switch from another company",
+  "lead_magnet": "The Denver Landlord Rent Report 2026: unit-by-unit market rates by zip code",
+  "top_stats": [
+    "Managing 1,400+ doors across the Denver metro since 2009",
+    "Average vacancy time: 14 days versus industry average of 32",
+    "97% tenant retention rate at lease renewal"
+  ],
+  "website_url": "https://cornerstonedenver.example.com",
+  "landing_page_url": "https://cornerstonedenver.example.com/free-audit",
+  "city": "Denver",
+  "service_area": "Denver, Aurora, Lakewood, Centennial, and the greater Denver metro",
+  "contact_name": "Jordan Test",
+  "contact_email": "jordan@example.com",
+  "contact_phone": "555-0104"
+}
