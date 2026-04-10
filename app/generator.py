@@ -93,7 +93,35 @@ def _parse_json(text: str) -> dict:
         if lines and lines[-1].strip() == "```":
             lines = lines[:-1]
         cleaned = "\n".join(lines)
-    return json.loads(cleaned)
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        start = cleaned.find("{")
+        end = cleaned.rfind("}")
+        if start != -1 and end > start:
+            return json.loads(cleaned[start : end + 1])
+        raise
+
+
+def _call_gemini_json(system_prompt: str, user_prompt: str, attempts: int = 2) -> dict:
+    last_err: Exception | None = None
+    for i in range(1, attempts + 1):
+        raw = _call_gemini(system_prompt, user_prompt)
+        try:
+            return _parse_json(raw)
+        except json.JSONDecodeError as e:
+            last_err = e
+            snippet = raw[:400].replace("\n", " ") if raw else "<empty>"
+            logger.warning(
+                "JSON parse failed (attempt %d/%d): %s. Response head: %s",
+                i,
+                attempts,
+                e,
+                snippet,
+            )
+    raise RuntimeError(
+        f"Gemini returned unparseable JSON after {attempts} attempts: {last_err}"
+    )
 
 
 def _format_intake(data: IntakeData) -> dict:
@@ -131,8 +159,7 @@ def generate_scripts(data: IntakeData) -> GeneratedScripts:
     prompt = GENERATION_PROMPT.format(**formatted)
 
     logger.info("Generating initial scripts for %s", data.business_name)
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    parsed = _parse_json(raw)
+    parsed = _call_gemini_json(PLAYBOOK_RULES, prompt)
 
     return GeneratedScripts(
         hooks=_sanitize_list(parsed["hooks"]),
@@ -152,8 +179,7 @@ def verify_hooks(scripts: GeneratedScripts, data: IntakeData) -> dict:
     )
 
     logger.info("Verifying %d hooks", len(scripts.hooks))
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    return _parse_json(raw)
+    return _call_gemini_json(PLAYBOOK_RULES, prompt)
 
 
 def verify_meats(scripts: GeneratedScripts, data: IntakeData) -> dict:
@@ -169,8 +195,7 @@ def verify_meats(scripts: GeneratedScripts, data: IntakeData) -> dict:
     )
 
     logger.info("Verifying %d meats", len(scripts.meats))
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    return _parse_json(raw)
+    return _call_gemini_json(PLAYBOOK_RULES, prompt)
 
 
 def check_compatibility(scripts: GeneratedScripts, data: IntakeData) -> dict:
@@ -183,8 +208,7 @@ def check_compatibility(scripts: GeneratedScripts, data: IntakeData) -> dict:
     )
 
     logger.info("Checking hook-meat compatibility")
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    return _parse_json(raw)
+    return _call_gemini_json(PLAYBOOK_RULES, prompt)
 
 
 def regenerate_hooks(
@@ -195,7 +219,27 @@ def regenerate_hooks(
 ) -> list[str]:
     formatted = _format_intake(data)
 
-    passing_hooks = [h for i, h in enumerate(scripts.hooks) if i not in failed_indices]
+    total = len(scripts.hooks)
+    filtered: list[tuple[int, str]] = []
+    seen: set[int] = set()
+    for idx, reason in zip(failed_indices, reasons):
+        if not isinstance(idx, int) or idx < 0 or idx >= total or idx in seen:
+            logger.warning(
+                "Dropping out-of-range/duplicate hook index %r (total=%d)", idx, total
+            )
+            continue
+        seen.add(idx)
+        filtered.append((idx, reason))
+
+    if not filtered:
+        logger.info("No valid hook indices to regenerate after filtering")
+        return []
+
+    failed_indices = [idx for idx, _ in filtered]
+    reasons = [reason for _, reason in filtered]
+
+    failed_set = set(failed_indices)
+    passing_hooks = [h for i, h in enumerate(scripts.hooks) if i not in failed_set]
     failed_hooks_with_reasons = "\n".join(
         f'- Hook {idx + 1} (FAILED): "{scripts.hooks[idx]}" — Reason: {reason}'
         for idx, reason in zip(failed_indices, reasons)
@@ -213,8 +257,7 @@ def regenerate_hooks(
     )
 
     logger.info("Regenerating %d failed hooks", len(failed_indices))
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    parsed = _parse_json(raw)
+    parsed = _call_gemini_json(PLAYBOOK_RULES, prompt)
     return _sanitize_list(parsed["hooks"])
 
 
@@ -225,6 +268,25 @@ def regenerate_meats(
     reasons: list[str],
 ) -> list[str]:
     formatted = _format_intake(data)
+
+    total = len(scripts.meats)
+    filtered: list[tuple[int, str]] = []
+    seen: set[int] = set()
+    for idx, reason in zip(failed_indices, reasons):
+        if not isinstance(idx, int) or idx < 0 or idx >= total or idx in seen:
+            logger.warning(
+                "Dropping out-of-range/duplicate meat index %r (total=%d)", idx, total
+            )
+            continue
+        seen.add(idx)
+        filtered.append((idx, reason))
+
+    if not filtered:
+        logger.info("No valid meat indices to regenerate after filtering")
+        return []
+
+    failed_indices = [idx for idx, _ in filtered]
+    reasons = [reason for _, reason in filtered]
 
     failed_set = set(failed_indices)
     failed_meats_with_reasons = "\n".join(
@@ -254,6 +316,5 @@ def regenerate_meats(
     )
 
     logger.info("Regenerating %d failed meats", len(failed_indices))
-    raw = _call_gemini(PLAYBOOK_RULES, prompt)
-    parsed = _parse_json(raw)
+    parsed = _call_gemini_json(PLAYBOOK_RULES, prompt)
     return _sanitize_list(parsed["meats"])

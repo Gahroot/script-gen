@@ -94,5 +94,5 @@ class TestGenerateScripts:
     def test_invalid_json_raises(self, mock_call, sample_intake):
         mock_call.return_value = "not valid json"
 
-        with pytest.raises(json.JSONDecodeError):
+        with pytest.raises(RuntimeError, match="unparseable JSON"):
             generate_scripts(sample_intake)

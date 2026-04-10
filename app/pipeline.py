@@ -85,7 +85,7 @@ def run_pipeline(data: IntakeData) -> GeneratedScripts:
                 )
                 new_hooks = new_hooks_future.result()
                 for i, idx in enumerate(failed_hooks):
-                    if i < len(new_hooks):
+                    if i < len(new_hooks) and 0 <= idx < len(scripts.hooks):
                         scripts.hooks[idx] = new_hooks[i]
                 needs_regen = True
 
@@ -95,7 +95,7 @@ def run_pipeline(data: IntakeData) -> GeneratedScripts:
                 )
                 new_meats = new_meats_future.result()
                 for i, idx in enumerate(failed_meats):
-                    if i < len(new_meats):
+                    if i < len(new_meats) and 0 <= idx < len(scripts.meats):
                         scripts.meats[idx] = new_meats[i]
                 needs_regen = True
 
@@ -111,7 +111,7 @@ def run_pipeline(data: IntakeData) -> GeneratedScripts:
             )
             new_hooks = regenerate_hooks(scripts, data, compat_failed, compat_reasons)
             for i, idx in enumerate(compat_failed):
-                if i < len(new_hooks):
+                if i < len(new_hooks) and 0 <= idx < len(scripts.hooks):
                     scripts.hooks[idx] = new_hooks[i]
             needs_regen = True
 
